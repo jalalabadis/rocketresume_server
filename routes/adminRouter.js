@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require("../dbModels/userModel");
 const Resume = require("../dbModels/resumeModel");
+const LiveChat = require("../dbModels/liveChatModel");
 const Subscription = require("../dbModels/subscriptionModel");
 
 
@@ -28,7 +29,8 @@ router.post('/dashboard', async (req, res) => {
     try {
         const users = await User.countDocuments();
         const resumes = await Resume.countDocuments();
-        res.status(200).json({ users, resumes });
+        const support = await LiveChat.countDocuments({ status: false });
+        res.status(200).json({ users, resumes, support});
        
     } catch (err) {
       console.log(err);

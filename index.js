@@ -6,6 +6,8 @@ const http = require("http");
 const path = require("path");
 const userRouter = require("./routes/userRouter");
 const adminRouter = require("./routes/adminRouter");
+const trafficRouter = require("./routes/traffic");
+const liveChatRouter = require("./routes/chat");
 const Striperouter = require("./routes/stripe/checkoutSession");
 const webHookRouter = require("./routes/stripe/webhookRouter");
 require("dotenv").config();
@@ -25,6 +27,7 @@ dbConnect()
 
 // Enable CORS for all routes
 app.use(cors());
+app.use(express.json());
 
 // ✅ Stripe webhook route (must be before express.json())
 
@@ -72,6 +75,12 @@ app.use("/resume/stripe", Striperouter);
 
 // ✅ Admin routes
 app.use("/resume/admin", adminRouter);
+
+// ✅ Traffic routes
+app.use("/resume/traffic", trafficRouter);
+
+// ✅ Chat routes
+app.use("/resume/chat", liveChatRouter);
 
 // ✅ Error handlers (Add any custom error handlers here if needed)
 
