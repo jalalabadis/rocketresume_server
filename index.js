@@ -41,7 +41,7 @@ app.use("/resume/public", express.static(path.join(__dirname, "public")));
 // ✅ Default route
 app.get("/", async (req, res) => {
   try {
-    res.send("Welcome to Resume API v2.0");
+    res.send("Welcome to Resume API v2.5");
   } catch (error) {
     console.log(error.message);
   }
